@@ -1,0 +1,38 @@
+from random import randint
+from time import time
+from os import chdir
+
+chdir(r'C:\Users\jacob\FilesForPyCharm')
+
+time_start = time()
+
+letters = "abcdefghijklmnopqrstuvwxyz"
+f = open('random.txt', 'w')
+words = []
+rec_time = time()
+
+def adderfunc():
+    adder = []
+    global rec_time
+    while len(adder) < 5:
+        adder.append(letters[randint(0, 25)])
+    if ''.join(adder) not in words:
+        words.append(''.join(adder))
+        f.write(''.join(adder) + '\n')
+        if i % 10000 == 0:
+            print(i)
+            print(f'Hours since start: {(time() - time_start)/3600}')
+            print(f'Minutes since last checkpoint: {(time() - rec_time)/60}')
+            print('-------------------')
+            rec_time = time()
+        return
+    else:
+        adderfunc()
+
+
+for i in range(11881376):
+    adderfunc()
+
+
+f.close()
+print("--- {} hours ---".format((time() - time_start)/3600))
